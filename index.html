@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ConectAe - encontre lanches, restaurantes, comércio, pizzarias e serviços em sua cidade.">
+  <title>ConectAe | Encontre perto de você</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="container nav">
+      <a href="#" class="logo"><span>Conect</span>Ae</a>
+      <nav>
+        <a href="#explorar">Explorar</a>
+        <a href="#categorias">Categorias</a>
+        <a href="#anuncie">Anuncie seu negócio</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-content">
+        <span class="eyebrow">NEGÓCIOS LOCAIS • MIRANDIBA E CARNAUBEIRA DA PENHA</span>
+        <h1>Encontre o que você precisa <strong>ligeiro.</strong></h1>
+        <p>Descubra lugares, serviços e comércios perto de você.</p>
+
+        <div class="filters" id="explorar">
+          <label>
+            <span>Cidade</span>
+            <select id="cityFilter">
+              <option value="all">Todas as cidades</option>
+              <option value="Mirandiba">Mirandiba - PE</option>
+              <option value="Carnaubeira da Penha">Carnaubeira da Penha - PE</option>
+            </select>
+          </label>
+
+          <label>
+            <span>Tipo de negócio</span>
+            <select id="typeFilter">
+              <option value="all">Todos os tipos</option>
+              <option value="Lanches">Lanches</option>
+              <option value="Restaurantes">Restaurantes</option>
+              <option value="Comércio">Comércio</option>
+              <option value="Culturas">Culturas</option>
+              <option value="Pizzarias">Pizzarias</option>
+              <option value="Serviços">Serviços</option>
+              <option value="Outros">Outros</option>
+            </select>
+          </label>
+
+          <label class="search-field">
+            <span>Buscar</span>
+            <input id="searchFilter" type="search" placeholder="Nome do estabelecimento...">
+          </label>
+
+          <button id="clearFilters" class="btn secondary">Limpar</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="container results-section">
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ENCONTRE PERTO</span>
+          <h2 id="resultsTitle">Todos os pontos</h2>
+        </div>
+        <span id="resultCount" class="result-count"></span>
+      </div>
+
+      <div id="cards" class="cards"></div>
+      <div id="emptyState" class="empty hidden">
+        <div class="empty-icon">⌕</div>
+        <h3>Nenhum ponto encontrado</h3>
+        <p>Tente alterar os filtros ou a busca.</p>
+      </div>
+    </section>
+
+    <section id="categorias" class="categories">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">CATEGORIAS</span>
+            <h2>Explore por tipo</h2>
+          </div>
+        </div>
+        <div class="category-grid">
+          <button data-type="Lanches">🍔 <span>Lanches</span></button>
+          <button data-type="Restaurantes">🍽️ <span>Restaurantes</span></button>
+          <button data-type="Comércio">🛍️ <span>Comércio</span></button>
+          <button data-type="Culturas">🌵 <span>Culturas</span></button>
+          <button data-type="Pizzarias">🍕 <span>Pizzarias</span></button>
+          <button data-type="Serviços">🔧 <span>Serviços</span></button>
+          <button data-type="Outros">📍 <span>Outros</span></button>
+        </div>
+      </div>
+    </section>
+
+    <section id="anuncie" class="cta">
+      <div class="container cta-box">
+        <div>
+          <span class="eyebrow">É DONO DE UM NEGÓCIO?</span>
+          <h2>Coloque sua empresa no ConectAe.</h2>
+          <p>Seja encontrado por clientes da sua cidade e região.</p>
+        </div>
+        <a class="btn primary" href="https://wa.me/5587999999999?text=Ol%C3%A1!%20Quero%20cadastrar%20meu%20neg%C3%B3cio%20no%20ConectAe." target="_blank" rel="noopener">Quero anunciar</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-content">
+      <div>
+        <a href="#" class="logo"><span>Conect</span>Ae</a>
+        <p>Conectando você aos negócios locais.</p>
+      </div>
+      <p>© 2026 ConectAe. Projeto demonstrativo.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
