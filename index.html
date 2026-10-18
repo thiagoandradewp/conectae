@@ -3,29 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="ConectAe - encontre lanches, restaurantes, comércio, pizzarias e serviços em sua cidade.">
-  <title>ConectAe | Encontre perto de você</title>
+  <meta name="description" content="ConectAe Pernambuco - encontre lanches, restaurantes, comércio, pizzarias e serviços em sua cidade.">
+  <meta name="theme-color" content="#782030">
+  <title>ConectAe Pernambuco | Encontre perto de você</title>
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/favicon.png">
+  <meta property="og:title" content="ConectAe Pernambuco">
+  <meta property="og:description" content="Conectando você aos negócios locais do sertão pernambucano.">
+  <meta property="og:image" content="assets/logo-conectae.png">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
     <div class="container nav">
-      <a href="#" class="logo"><span>Conect</span>Ae</a>
-      <nav>
+      <a href="#" class="logo" aria-label="ConectAe Pernambuco - início">
+        <img src="assets/logo-conectae.png" alt="ConectAe Pernambuco" width="900" height="370">
+      </a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mainNav">
+        <span></span><span></span><span></span>
+      </button>
+      <nav id="mainNav">
         <a href="#explorar">Explorar</a>
         <a href="#categorias">Categorias</a>
-        <a href="#anuncie">Anuncie seu negócio</a>
+        <a href="#anuncie" class="nav-cta">Anuncie seu negócio</a>
       </nav>
     </div>
   </header>
 
   <main>
     <section class="hero">
+      <div class="hero-deco" aria-hidden="true">
+        <span class="ray r1"></span><span class="ray r2"></span><span class="ray r3"></span>
+        <span class="ray r4"></span><span class="ray r5"></span><span class="ray r6"></span>
+      </div>
       <div class="container hero-content">
-        <span class="eyebrow">NEGÓCIOS LOCAIS • MIRANDIBA E CARNAUBEIRA DA PENHA</span>
-        <h1>Encontre o que você precisa <strong>ligeiro.</strong></h1>
-        <p>Descubra lugares, serviços e comércios perto de você.</p>
+        <div class="hero-text">
+          <span class="eyebrow">NEGÓCIOS LOCAIS • MIRANDIBA E CARNAUBEIRA DA PENHA</span>
+          <h1>Encontre o que você precisa <strong>ligeiro.</strong></h1>
+          <p>Descubra lugares, serviços e comércios do sertão pernambucano, pertinho de você.</p>
+          <div class="hero-stats">
+            <div><strong id="statTotal">0</strong><span>negócios</span></div>
+            <div><strong>2</strong><span>cidades</span></div>
+            <div><strong>7</strong><span>categorias</span></div>
+          </div>
+        </div>
+        <div class="hero-logo" aria-hidden="true">
+          <img src="assets/logo-conectae.png" alt="">
+        </div>
+      </div>
 
+      <div class="container">
         <div class="filters" id="explorar">
           <label>
             <span>Cidade</span>
@@ -52,10 +79,10 @@
 
           <label class="search-field">
             <span>Buscar</span>
-            <input id="searchFilter" type="search" placeholder="Nome do estabelecimento...">
+            <input id="searchFilter" type="search" placeholder="Nome, endereço ou tipo...">
           </label>
 
-          <button id="clearFilters" class="btn secondary">Limpar</button>
+          <button id="clearFilters" class="btn secondary" type="button">Limpar</button>
         </div>
       </div>
     </section>
@@ -66,7 +93,7 @@
           <span class="eyebrow">ENCONTRE PERTO</span>
           <h2 id="resultsTitle">Todos os pontos</h2>
         </div>
-        <span id="resultCount" class="result-count"></span>
+        <span id="resultCount" class="result-count" aria-live="polite"></span>
       </div>
 
       <div id="cards" class="cards"></div>
@@ -86,13 +113,13 @@
           </div>
         </div>
         <div class="category-grid">
-          <button data-type="Lanches">🍔 <span>Lanches</span></button>
-          <button data-type="Restaurantes">🍽️ <span>Restaurantes</span></button>
-          <button data-type="Comércio">🛍️ <span>Comércio</span></button>
-          <button data-type="Culturas">🌵 <span>Culturas</span></button>
-          <button data-type="Pizzarias">🍕 <span>Pizzarias</span></button>
-          <button data-type="Serviços">🔧 <span>Serviços</span></button>
-          <button data-type="Outros">📍 <span>Outros</span></button>
+          <button type="button" data-type="Lanches">🍔 <span>Lanches</span></button>
+          <button type="button" data-type="Restaurantes">🍽️ <span>Restaurantes</span></button>
+          <button type="button" data-type="Comércio">🛍️ <span>Comércio</span></button>
+          <button type="button" data-type="Culturas">🌵 <span>Culturas</span></button>
+          <button type="button" data-type="Pizzarias">🍕 <span>Pizzarias</span></button>
+          <button type="button" data-type="Serviços">🔧 <span>Serviços</span></button>
+          <button type="button" data-type="Outros">📍 <span>Outros</span></button>
         </div>
       </div>
     </section>
@@ -110,9 +137,12 @@
   </main>
 
   <footer>
+    <div class="divider" aria-hidden="true"><span></span><span></span></div>
     <div class="container footer-content">
       <div>
-        <a href="#" class="logo"><span>Conect</span>Ae</a>
+        <a href="#" class="logo" aria-label="ConectAe Pernambuco - início">
+          <img src="assets/logo-conectae-dark.png" alt="ConectAe Pernambuco" width="900" height="373">
+        </a>
         <p>Conectando você aos negócios locais.</p>
       </div>
       <p>© 2026 ConectAe. Projeto demonstrativo.</p>
