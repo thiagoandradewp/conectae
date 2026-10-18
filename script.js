@@ -154,9 +154,31 @@ const cards = document.querySelector("#cards");
 const emptyState = document.querySelector("#emptyState");
 const resultCount = document.querySelector("#resultCount");
 const resultsTitle = document.querySelector("#resultsTitle");
+const categoryButtons = document.querySelectorAll(".category-grid button");
+const menuToggle = document.querySelector("#menuToggle");
+const mainNav = document.querySelector("#mainNav");
+
+const fallbackImage = "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80";
+
+// Cor do selo de categoria, seguindo a paleta da logo
+const typeColors = {
+  Lanches: "",
+  Pizzarias: "",
+  Restaurantes: "t-wine",
+  Culturas: "t-wine",
+  Comércio: "t-blue",
+  Serviços: "t-blue",
+  Outros: "t-blue"
+};
 
 function normalize(text) {
   return text.toLocaleLowerCase("pt-BR").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+}
+
+function escapeHTML(text) {
+  return String(text).replace(/[&<>"']/g, char => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  })[char]);
 }
 
 function render() {
@@ -178,20 +200,25 @@ function render() {
     const message = encodeURIComponent(
       `Olá! Vi o ${item.name} no ConectAe e gostaria de mais informações.`
     );
+    const mapQuery = encodeURIComponent(`${item.name}, ${item.address}, ${item.city} - PE`);
     return `
       <article class="card">
         <div class="card-image">
-          <img src="${item.image}" alt="${item.name}" loading="lazy"
-               onerror="this.src='https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80'">
-          <span class="badge">${item.city} - PE</span>
+          <img src="${escapeHTML(item.image)}" alt="${escapeHTML(item.name)}" loading="lazy"
+               onerror="this.onerror=null;this.src='${fallbackImage}'">
+          <span class="badge">${escapeHTML(item.city)} - PE</span>
         </div>
         <div class="card-body">
-          <div class="type">${item.type}</div>
-          <h3>${item.name}</h3>
-          <div class="info"><span class="icon">📍</span><span>${item.address}</span></div>
+          <div class="type ${typeColors[item.type] || ""}">${escapeHTML(item.type)}</div>
+          <h3>${escapeHTML(item.name)}</h3>
+          <div class="info"><span class="icon">📍</span><span>${escapeHTML(item.address)}</span></div>
           <div class="card-footer">
-            <a class="btn whatsapp" href="https://wa.me/${item.phone}?text=${message}" target="_blank" rel="noopener">
+            <a class="btn whatsapp" href="https://wa.me/${encodeURIComponent(item.phone)}?text=${message}" target="_blank" rel="noopener">
               WhatsApp
+            </a>
+            <a class="btn map" href="https://www.google.com/maps/search/?api=1&query=${mapQuery}" target="_blank" rel="noopener"
+               aria-label="Ver ${escapeHTML(item.name)} no mapa" title="Ver no mapa">
+              Mapa
             </a>
           </div>
         </div>
@@ -211,6 +238,12 @@ function render() {
   } else {
     resultsTitle.textContent = "Todos os pontos";
   }
+
+  categoryButtons.forEach(button => {
+    const active = button.dataset.type === type;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", active);
+  });
 }
 
 [cityFilter, typeFilter].forEach(el => el.addEventListener("change", render));
@@ -223,12 +256,24 @@ clearFilters.addEventListener("click", () => {
   render();
 });
 
-document.querySelectorAll(".category-grid button").forEach(button => {
+categoryButtons.forEach(button => {
   button.addEventListener("click", () => {
-    typeFilter.value = button.dataset.type;
-    document.querySelector("#explorar").scrollIntoView({ behavior: "smooth", block: "center" });
+    // Clicar de novo na categoria ativa remove o filtro
+    typeFilter.value = typeFilter.value === button.dataset.type ? "all" : button.dataset.type;
+    document.querySelector("#explorar").scrollIntoView({ behavior: "smooth", block: "start" });
     render();
   });
 });
+
+function setMenu(open) {
+  mainNav.classList.toggle("open", open);
+  menuToggle.setAttribute("aria-expanded", open);
+  menuToggle.setAttribute("aria-label", open ? "Fechar menu" : "Abrir menu");
+}
+
+menuToggle.addEventListener("click", () => setMenu(!mainNav.classList.contains("open")));
+mainNav.querySelectorAll("a").forEach(link => link.addEventListener("click", () => setMenu(false)));
+
+document.querySelector("#statTotal").textContent = businesses.length;
 
 render();
